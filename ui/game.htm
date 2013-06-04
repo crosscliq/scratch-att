@@ -2,20 +2,74 @@
 <html lang="en">
 	<head>
 		<meta charset="<?php echo $ENCODING; ?>" />
-		<title>Scratch and Donation with TT</title>
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<title>Scratch and Win!</title>
 		<base href="<?php echo $SCHEME.'://'.$HOST.':'.$PORT.$BASE.'/'; ?>" />
-		<link rel="stylesheet" href="ui/css/style.css" type="text/css" />
+		<link rel="stylesheet" href="ui/css/styles.css" type="text/css" />
+		<script type="text/javascript" src="ui/js/jquery-1.7.2.min.js" ></script>
+<script type="text/javascript" src="ui/js/jquery.rabidScratchCard.prod.js"></script>
+<script>
+
+$(document).ready(function() {
+	setTimeout(function() { $('#loader').fadeOut(500); }, 1500);
+
+});
+
+</script>
 	</head>
 	<body>
-<img src="<?php echo $prize[0]['prize_image']; ?>">  	
+<div id="loader">
+	<div class="loader-bg"></div>
+		<span class="loader-txt">Get <b>Ready</b> <br/>to <b>PLAY...</b></span>
+	</div>
+</div>
+<div class="moby_wrap mini_nav_wrap">
 
-<ul>
-<li>Yes – <a href="<?php  echo $donateurl; ?>">Do to the donate page</a></li>
+    <header class="mini_nav"> 
+      
+    <a id="logo" href="index.html"><img src="images/logo.png" alt=""></a>
+    
+    </header>
 
-<li><a href="/remind"> Please remind me later</a>
-<li>No, thank-you, I’ve already donated</li>
+    <div id="content" class="m_10">
+<script type="text/javascript">
 
+		$(function(){
 
+			var winner= <?=$winner; ?>;			
+
+			$("#1").rabidScratchCard({
+	
+				revealRadius:40,
+				percentComplete:70,
+				revealOnComplete:true,
+				updateOnMouseMove:false,//setting this option is processor intensive. So, set this only if necessary. If set to false, % will be calculated only on muse up of scracthing
+				updateOnFingerMove:false,
+			       onScratchComplete : function(percentScratched) {
+				
+				// winner = prizeID?
+				if (winner) {
+				 $('#popup').css({'opacity':'100','z-index':'11000'});
+				}	
+			    }
+			});
+		
+		});
+	</script>
+
+    </div>
+<div id="popup">
+	<img src="images/win.png"> <!-- needs to be prizeID image -->
+</div>
+
+					<div id="1" class="panel scratchCard" style="text-align: center; z-index:4000; margin-left:auto; margin-right:auto; display: block; width:100%; height:390px; box-shadow: 0px 8px 7px rgba(0,0,0,0.4); background-image: url(images/coupon_bg.jpg);" data-backGroundImage="images/<?if ($winner!==1){  echo "no"; } ?>win.jpg"  data-foreGroundImage="images/reveal.jpg">
+
+</div>
+</div>
 
 </body>
 </html>
+
+
+
