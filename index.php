@@ -13,10 +13,12 @@ $f3->route('GET /',
 );
 if(iswinner()) {
 $f3->set('prize',$db->exec('SELECT *  FROM prize WHERE redeemed = "0" limit 1'));
+$f3->set('winner', 1);
 }  else {
 $loser = array();
 $loser[] = array('prize_image' => 'http://3.bp.blogspot.com/_6a6NWbCRGM4/TQc-F-oyCRI/AAAAAAAAALw/zYf-hCx2MFs/s400/loser.jpg'); 
 $f3->set('prize', $loser);
+$f3->set('winner', 0);
  
 }	
 
